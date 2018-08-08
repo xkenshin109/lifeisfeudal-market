@@ -1,0 +1,72 @@
+﻿<h2>Black Oak Order Form</h2>
+<div data-bind="with: orderForm">
+    <div>
+        <label>Copy and Paste this in a message to your GM to submit your order!</label>
+    </div>
+    <div>
+        <textarea data-bind="text: orderMessage,value: orderMessage"></textarea>
+    </div>
+    <div>
+        <input data-bind="text:name, value:name" placeholder="Player Name" type="text" />
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-md-2"></th>
+                    <th class="col-md-2">Item</th>
+                    <th class="col-md-2">Quality</th>
+                    <th class="col-md-2">Quantity</th>
+                    <th class="col-md-2">Price</th>
+                    <th class="col-md-2">Selling?</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: products">
+                <tr data-bind="visible:!edit()">
+                    <td class="col-md-2">
+                        <button type="button" class="btn btn-default" data-bind="click: $parent.editProduct">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </td>
+                    <td class="col-md-2" data-bind="text:item().name"></td>
+                    <td class="col-md-2" data-bind="text:itemQualityType().name"></td>
+
+                    <td class="col-md-2" data-bind="text:quantity"></td>
+                    <td class="col-md-2" data-bind="text:price"></td>
+                    <td class="col-md-2">
+                        <span data-bind="text:(isSelling()===0 || !isSelling() )?'NO':'YES'"></span>
+                    </td>
+                </tr>
+                <tr data-bind="visible:edit(), with: $parent.productForEdit">
+                    <td class="col-md-2">
+                        <button type="button" class="btn btn-default " data-bind="click: $parents[1].confirmEdit">
+                            <span class="glyphicon glyphicon-floppy-save"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" data-bind="click: $parents[1].cancelEdit">
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </td>
+                    <td class="col-md-2">
+                        <select class="form-control" data-bind="options: $root.allItems, optionsText:'name',value:item,event:{change:updatePrice}"></select>
+                    </td>
+                    <td class="col-md-2">
+                        <select class="form-control" data-bind="options: activeQuality(), optionsText:'name',value:itemQualityType,event:{change:updatePrice}"></select>
+                    </td>
+                    <td class="col-md-2">
+                        <input type="text" placeholder="Quantity" data-bind="value:quantity,event:{change:updatePrice}" class="form-control" />
+                    </td>
+                    <td class="col-md-2">
+                        <input type="text" placeholder="Price" data-bind="value:price,event:{change:updatePrice}" class="form-control" disabled />
+                    </td>
+                    <td class="col-md-2">
+                        <input type="checkbox" data-bind="checked:isSelling,value:isSelling,event:{change:updatePrice}" class="form-control" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button class="btn btn-block btn-primary" data-bind="click:addItem">Add New Item</button>
+            <button class="btn btn-block btn-success" data-bind="click:save;enable:enableSave">Send Order</button>
+        </div>
+    </div>
+    
+</div>
+

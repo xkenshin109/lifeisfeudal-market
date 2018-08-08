@@ -1,0 +1,30 @@
+﻿body {
+}
+
+.selling{
+    font-weight: bold;
+    color:red;
+    font-size: 12pt;
+}
+
+.buying {
+    font-weight: bold;
+    color: green;
+    font-size: 12pt;
+}
+
+.item {
+    background-color: #F2CEE6;
+    font-size: 12pt;
+    font-weight: bold;
+}
+.itemQuality-header {
+    background-color: #E8DCB9;
+    font-size: 12pt;
+    font-weight: bold;
+}
+.itemQuality{
+    background-color: #C3DBC5;
+    font-size: 12pt;
+    font-weight: bold;
+}

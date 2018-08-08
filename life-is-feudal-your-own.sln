@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "life-is-feudal-your-own", "life-is-feudal-your-own\life-is-feudal-your-own.csproj", "{B55179F9-94F3-45CA-BE13-FF9C219C97A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{023FC4E9-64EE-4D1D-B2C4-92AAAC06665A} = {023FC4E9-64EE-4D1D-B2C4-92AAAC06665A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreManagement", "CoreManagement\CoreManagement.csproj", "{023FC4E9-64EE-4D1D-B2C4-92AAAC06665A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkbookImport", "WorkbookImport\WorkbookImport.csproj", "{76128D0E-B8A3-4010-8856-C910CDFFAC80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{023FC4E9-64EE-4D1D-B2C4-92AAAC06665A} = {023FC4E9-64EE-4D1D-B2C4-92AAAC06665A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B55179F9-94F3-45CA-BE13-FF9C219C97A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B55179F9-94F3-45CA-BE13-FF9C219C97A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B55179F9-94F3-45CA-BE13-FF9C219C97A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B55179F9-94F3-45CA-BE13-FF9C219C97A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{023FC4E9-64EE-4D1D-B2C4-92AAAC06665A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023FC4E9-64EE-4D1D-B2C4-92AAAC06665A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023FC4E9-64EE-4D1D-B2C4-92AAAC06665A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023FC4E9-64EE-4D1D-B2C4-92AAAC06665A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76128D0E-B8A3-4010-8856-C910CDFFAC80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76128D0E-B8A3-4010-8856-C910CDFFAC80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76128D0E-B8A3-4010-8856-C910CDFFAC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76128D0E-B8A3-4010-8856-C910CDFFAC80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14635746-DCE0-48FF-9F59-B01A09165715}
+	EndGlobalSection
+EndGlobal
