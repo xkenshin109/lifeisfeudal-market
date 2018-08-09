@@ -16,6 +16,7 @@ namespace CoreManagement.Models
         public OrderForm()
         {
             Products = new List<OrderFormProduct>();
+            Created = DateTime.Now;
         }
     }
 }

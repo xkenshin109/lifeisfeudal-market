@@ -1,6 +1,6 @@
 ﻿function OrderFormProductsVm(data, parent)
 {
-    let self = this;
+    var self = this;
     self.parent = ko.observable(parent);
     self.id = ko.observable(null);
     self.orderForm_id = ko.observable();
@@ -42,6 +42,16 @@
         self.quantity(data.quantity);
         self.price(data.price);
     };
+    self.getQuality = function() {
+        if (self.item().id === 0) {
+            return null;
+        }
+        var ret =_.find(self.parent().parent().allItemQuality(),
+            function(d) {
+                return d.Item_Id === self.item().id && self.itemQualityType().id === d.ItemQualityType_Id;
+            });
+        return ret;
+    }
     self.activeItems = function () {
 
         return self.parent().parent().allItems();
@@ -50,10 +60,10 @@
         if (self.item().id === 0) {
             return self.parent().parent().allItemQuality();
         }
-        let aq = _.filter(self.parent().parent().allItemQuality(), (i) => {
+        var aq = _.filter(self.parent().parent().allItemQuality(), (i) => {
             return i.Item_Id === self.item().id && (i.BuyActive && !self.isSelling() || i.SellActive && self.isSelling());
         });
-        let types = _.filter(self.parent().parent().allItemTypes(), i => {
+        var types = _.filter(self.parent().parent().allItemTypes(), i => {
             return _.some(aq, q => {
                 return q.ItemQualityType_Id === i.id;
             });
@@ -62,8 +72,8 @@
         return types;
     };
     self.updatePrice = function () {
-        let itemquality = null;
-        let perPiece = 1;
+        var itemquality = null;
+        var perPiece = 1;
 
         itemquality = _.find(self.parent().parent().allItemTypes(), function (i) {
             return i.id === self.itemQualityType().id;
@@ -88,7 +98,7 @@
 
     self.save = function () {
         console.log(ko.toJS(self));
-        let data = {
+        var data = {
             Id: self.id(),
             OrderForm_id: self.orderForm_id(),
             ItemQuality_id: self.itemQuality().Id,

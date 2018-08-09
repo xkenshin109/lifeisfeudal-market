@@ -24,7 +24,7 @@
         self.keyForEdit().edit(true);
     };
     self.confirmEdit = function (key) {
-        $.post('/Admin/Save', {
+        $.post("/Admin/Save", {
             Key: key.key(),
             Value: key.value(),
             Id: key.id()
@@ -37,7 +37,7 @@
         if (!self.enteredPassword()) {
             return;
         }
-        $.post('/Admin/CheckAccess', { password: self.enteredPassword() }, function (data, err) {
+        $.post("/Admin/CheckAccess", { password: self.enteredPassword() }, function (data, err) {
             if (data) {
                 self.authenticated(true);
                 self.modal().style.display = "none";
@@ -50,11 +50,11 @@
         r.forEach(c => {
             self.configs.push(new AdminVm(c,self));
         });
-        self.loaded(true);
         if (!self.authenticated()) {
-            self.modal(document.getElementById('adminModal'));
+            self.modal(document.getElementById("adminModal"));
             self.modal().style.display = "block";
         }
+        self.loaded(true);
     });
 
 }

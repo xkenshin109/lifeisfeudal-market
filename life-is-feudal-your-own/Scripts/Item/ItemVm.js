@@ -72,8 +72,8 @@
         
     };
     self.save = function () {
-        let self = this;
-        let data = {
+        var self = this;
+        var data = {
             Name: self.name(),
             Price: self.price()?parseInt(self.price()):0
             //created_at: self.created_at(),

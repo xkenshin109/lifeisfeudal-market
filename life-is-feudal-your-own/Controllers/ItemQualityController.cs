@@ -42,6 +42,7 @@ namespace life_is_feudal_your_own.Controllers
                     Item_id = ret.Item_Id,
                     ItemQualityType_id = ret.ItemQualityType_Id,
                     sell_active = ret.SellActive,
+                    free = ret.Free,
                     created_at = ret.Created
                 };
                 return Json(item, JsonRequestBehavior.AllowGet);
@@ -59,6 +60,7 @@ namespace life_is_feudal_your_own.Controllers
                     Item_id = y.Item_Id,
                     ItemQualityType_id = y.ItemQualityType_Id,
                     sell_active = y.SellActive,
+                    free = y.Free,
                     created_at = y.Created
                 });
                 return Json(items, JsonRequestBehavior.AllowGet);
@@ -90,7 +92,8 @@ namespace life_is_feudal_your_own.Controllers
                     Item_id = item.Item_Id,
                     ItemQualityType_id = item.ItemQualityType_Id,
                     sell_active = item.SellActive,
-                    created_at = item.Created
+                    created_at = item.Created,
+                    free = item.Free
                 };
                 return Json(ret, JsonRequestBehavior.AllowGet);
             }

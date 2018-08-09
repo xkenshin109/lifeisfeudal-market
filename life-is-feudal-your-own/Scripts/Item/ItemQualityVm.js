@@ -23,8 +23,8 @@
         return (self.itemQualityType().sell_multiplier * self.parent().price() * self.itemQualityType().buy_multiplier).toFixed(0);
     });
     self.updateItemQualityType = function () {
-        let itemquality = null;
-        let perPiece = 1;
+        var itemquality = null;
+        var perPiece = 1;
         console.log('Is Selling', self.isSelling());
         console.log('Quality', self.quality());
         
@@ -45,7 +45,7 @@
         if (data.itemQualityType) {
             self.itemQualityType(data.itemQualityType);
         } else {
-            let itemTypes = ko.toJS(self.parent().parent().parent().parent().itemTypes);
+            var itemTypes = ko.toJS(self.parent().parent().parent().parent().itemTypes);
             _.forEach(itemTypes, i => {
                 if (i.id === data.ItemQualityType_id) {
                     self.itemQualityType(i);
@@ -62,7 +62,7 @@
     self.save = function () {
         
         try {
-            let data = {
+            var data = {
                 Item_Id: self.item_id(),
                 ItemQualityType_Id: self.itemQualityType().id,
                 BuyActive: self.buy_active(),

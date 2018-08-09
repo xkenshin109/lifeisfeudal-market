@@ -355,7 +355,7 @@ window.Modernizr = (function( window, document, undefined ) {
                 // return the property name as a string
                 if (elem === false) return props[i];
 
-                // let's bind a function
+                // var's bind a function
                 if (is(item, 'function')){
                   // default to autobind unless override
                   return item.bind(elem || obj);

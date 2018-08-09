@@ -5996,7 +5996,7 @@
                 return (withoutSuffix || isFuture) ? 'rok' : 'rokem';
             case 'yy': // 9 years / in 9 years / 9 years ago
                 if (withoutSuffix || isFuture) {
-                    return result + (plural$1(number) ? 'roky' : 'let');
+                    return result + (plural$1(number) ? 'roky' : 'var');
                 } else {
                     return result + 'lety';
                 }
@@ -12160,7 +12160,7 @@
                 } else if (number < 5) {
                     result += withoutSuffix || isFuture ? 'leta' : 'leti';
                 } else {
-                    result += withoutSuffix || isFuture ? 'let' : 'leti';
+                    result += withoutSuffix || isFuture ? 'var' : 'leti';
                 }
                 return result;
         }

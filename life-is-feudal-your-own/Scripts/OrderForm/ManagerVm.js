@@ -23,6 +23,7 @@ function ManagerVm() {
         r.itemTypes.forEach(i => {
             self.allItemTypes.push(i);
         });
+        self.loaded(true);
     });
 }
 function loadItems(callback) {

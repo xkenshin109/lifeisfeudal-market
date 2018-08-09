@@ -62,7 +62,7 @@
         self.editProduct(x);
     };
     self.validations = function () {
-        let ret = [];
+        var ret = [];
         if (self.name() === undefined || self.name() === "") {
             ret.push('Please provide a name before continuing');
         }
@@ -75,13 +75,23 @@
         console.log(self.validations());
         if (self.validations().length === 0) {
             var x = {
-                PlayerName: self.name()
+                PlayerName: self.name(),
+                Products: []
             };
+            self.products().forEach(p => {
+                var r = {
+                    ItemQuality_Id: p.getQuality().Id,
+                    Selling: p.isSelling(),
+                    Price: p.price(),
+                    Quantity: p.quantity()
+                };
+                x.Products.push(r);
+            });
             if (self.id()) {
-                x.id = self.id();
+                x.Id = self.id();
             }
-            $.post('/OrderForm/Save', x, function (data, err) {
-                self.update(data);
+            $.post('/OrderForm/Save',{ product: x }, function (d) {
+                self.update(d);
                 return self.send();
             });
         } else {
@@ -91,41 +101,42 @@
     };
 
     self.send = function () {
-        let order = {
-            PlayerName: self.name()
+        var order = {
+            PlayerName: self.name(),
+            OrderNumber: self.orderNumber()
         };
-        let prod = [];
+        var prod = [];
         console.log(ko.toJS(self.products()));
         _.forEach(self.products(), (p) => {
-            let s = this;
-            let itemQuality = _.find(self.parent().allItemQuality, (i) => {
-                return i.Item_Id === p.item().id && i.ItemQualityType_id === p.itemQualityType().id;
+            var s = this;
+            var itemQuality = _.find(self.parent().allItemQuality(), (i) => {
+                return i.Item_Id === p.item().id && i.ItemQualityType_Id === p.itemQualityType().id;
             });
             p.orderForm_id(self.id());
             p.itemQuality(itemQuality);
             p.updatePrice();
             prod.push(p);
         });
-        let message = '';
-        let selling = _.filter(prod, (p) => {
+        var message = '';
+        var selling = _.filter(prod, (p) => {
             console.log(ko.toJS(p));
             return p.Selling;
         });
         if (selling.length > 0) {
             message += 'Selling: \n';
             _.forEach(selling, (p) => {
-                p.save();
+                //p.save();
                 message += p.Quantity + ' X ' + p.item().name + '(' + p.itemQualityType().name + ') ' + p.item().price + ' = ' + p.price() + '\n';
             });
-            let total = _.sum(selling, function (s) { return s.price(); });
+            var total = _.sum(selling, function (s) { return s.price(); });
             console.log(total);
         }
-        let buying = _.filter(prod, (p) => { return !p.Selling; });
+        var buying = _.filter(prod, (p) => { return !p.Selling; });
         if (buying.length > 0) {
             message += '\n Buying:\n';
             _.forEach(buying, (p) => {
                 console.log(ko.toJS(p));
-                p.save();
+                //p.save();
                 message += p.quantity() + ' X ' + p.item().name + '(' + p.itemQualityType().name + ') ' + (p.item().price ? p.item().price : 0) + ' = ' + (p.price() ? p.price() : 0) + '\n';
             });
         }

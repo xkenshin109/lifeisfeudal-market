@@ -1,5 +1,5 @@
 ﻿function SubCategoryVm(data, parent) {
-    let self = this;
+    var self = this;
     self.parent = ko.observable(parent);
     self.id = ko.observable(0);
     self.name = ko.observable('');

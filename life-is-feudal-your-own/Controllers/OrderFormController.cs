@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -19,31 +20,47 @@ namespace life_is_feudal_your_own.Controllers
 {
     public class OrderFormController : Controller
     {
-        private static OrderForm _product { get; set; }
         // GET: OrderForm
         public ActionResult Index()
         {
-            if(_product == null)
-            {
-                _product = new OrderForm
-                {
-                    PlayerName = ""
-                };
-            }
             return View();
         }
         public ActionResult Save(OrderForm product)
         {
             using(var db = new LifeIsFeudalDb())
             {
-                db.OrderForms.Add(product);
-                db.SaveChanges();
+                try
+                {
+                    db.OrderForms.Add(product);
+                    db.SaveChanges();
+                    product.OrderNumber = product.Id.ToString().PadLeft(5, '0');
+                    db.Entry(product).State = EntityState.Modified;
+                    db.SaveChanges();
+                    var ret = new
+                    {
+                        Id = product.Id,
+                        OrderNumber = product.OrderNumber,
+                        PlayerName = product.PlayerName
+                    };
+                    return Json(ret);
+                }
+                catch (Exception ie)
+                {
+                    var e = ie;
+                    return Json(ie);
+                }
             }
-            return Json(product, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SendOrder(OrderForm order, List<OrderFormProduct> products)
         {
             string htmlBody = htmlMessage.CreateHtmlHeader(order);
+            using (var db = new LifeIsFeudalDb())
+            {
+                products.ForEach(x =>
+                {
+                    x.ItemQuality = db.ItemQualities.FirstOrDefault(y => x.ItemQuality_Id == y.Id);
+                });
+            }
             var itemsSelling = products.Where(x => x.Selling).ToList();
             var itemsBuying = products.Where(x => !x.Selling).ToList();
             if(itemsSelling.Count > 0)

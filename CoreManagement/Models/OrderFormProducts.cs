@@ -18,5 +18,10 @@ namespace CoreManagement.Models
         public int Price { get; set; }
         public int Quantity { get; set; }
         public DateTime Created { get; set; }
+
+        public OrderFormProduct()
+        {
+            Created = DateTime.Now;
+        }
     }
 }
