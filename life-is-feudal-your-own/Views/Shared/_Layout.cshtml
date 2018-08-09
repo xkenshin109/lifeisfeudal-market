@@ -21,6 +21,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Order Form", "Index", "OrderForm")</li>
                     <li>@Html.ActionLink("Item Management", "Index", "Item")</li>
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                 </ul>
             </div>
         </div>
@@ -31,16 +32,18 @@
             <p>&copy; @DateTime.Now.Year - Caridia Crossroads Mart Place</p>
         </footer>
     </div>
-    <script src="~/Scripts/lodash.js"></script>
-    <script src="~/Scripts/moment.js"></script>
-    <script src="~/Scripts/async.min.js"></script>
-    <script src="~/Scripts/jquery-3.3.1.slim.js"></script>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/knockout-3.4.2.js"></script>
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
-    <link href="~/Scripts/LifeIsFeudalStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/deps/lodash.js"></script>
+    <script src="~/Scripts/deps/moment.js"></script>
+    <script src="~/Scripts/deps/async.min.js"></script>
+    <script src="~/Scripts/deps/jquery-3.3.1.slim.js"></script>
+    <script src="~/Scripts/deps/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/deps/jquery.validate.js"></script>
+    <script src="~/Scripts/deps/bootstrap.js"></script>
+    <script src="~/Scripts/deps/knockout-3.4.2.js"></script>
+    <script src="~/Scripts/deps/modernizr-2.8.3.js"></script>
+    <link href="~/Scripts/deps/LifeIsFeudalStyle.css" rel="stylesheet" />
+    @RenderSection("modals", required: false)
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

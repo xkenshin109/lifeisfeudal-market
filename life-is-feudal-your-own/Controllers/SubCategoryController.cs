@@ -24,5 +24,18 @@ namespace life_is_feudal_your_own.Controllers
                 return Json(ret, JsonRequestBehavior.AllowGet);
             }            
         }
+        public ActionResult GetItemsById(long id)
+        {
+            using(var db = new LifeIsFeudalDb())
+            {
+                var ret = db.Items.Where(x => x.SubCategory_Id == id).ToList().Select(x=> new
+                {
+                    id = x.Id,
+                    name = x.Name,
+                    price = x.Price
+                });
+                return Json(ret, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

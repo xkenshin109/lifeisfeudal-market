@@ -7,11 +7,7 @@
     self.expanded = ko.observable(false);
     self.itemForEdit = ko.observable(null);
     self.selectedItem = ko.observable(null);
-    self.addItems = function (items) {
-        _.forEach(items, function (item) {
-            self.items.push(new ItemVm(item, self));
-        });
-    };
+    
     self.editItem = function (item) {
         if (self.selectedItem()) {
             self.cancelEdit();
@@ -38,8 +34,14 @@
         self.itemForEdit(null);
     };
     self.expand = function () {
-        console.log(ko.toJS(self));
         self.expanded(!self.expanded());
+        $.get('/Item/GetItemsById', { catId:self.parent().id,subId: self.id() }, function (data,err)
+        {
+            self.items.removeAll();
+            data.forEach(i => {
+                self.items.push(new ItemVm(i,self));
+            });
+        });
     };
     self.update = function (data) {
         self.id(data.id);

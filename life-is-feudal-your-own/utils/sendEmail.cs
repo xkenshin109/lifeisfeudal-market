@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreManagement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,8 +18,10 @@ namespace life_is_feudal_your_own.utils
         {
             try
             {
-                using(var mail = new MailMessage())
+                using (var mail = new MailMessage())
+                    using(var db = new LifeIsFeudalDb())
                 {
+                    _emailTo = db.Configurations.FirstOrDefault(x => x.Key == "Email").Value;
                     mail.From = new MailAddress(_emailFrom);
                     mail.To.Add(_emailTo);
                     mail.Subject = subject;
@@ -26,7 +29,6 @@ namespace life_is_feudal_your_own.utils
                     mail.IsBodyHtml = true;
                     // Can set to false, if you are sending pure text.
 
-                    
                     using (SmtpClient smtp = new SmtpClient())
                     {
                         smtp.Credentials = new NetworkCredential(_emailFrom, _password);

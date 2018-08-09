@@ -1,0 +1,216 @@
+﻿table > thead > tr > th,
+table > tbody > tr > th,
+table > tfoot > tr > th,
+table > thead > tr > td,
+table > tbody > tr > td,
+table > tfoot > tr > td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+}
+
+.selling{
+    font-weight: bold;
+    color:red;
+    font-size: 12pt;
+}
+
+.buying {
+    font-weight: bold;
+    color: green;
+    font-size: 12pt;
+}
+
+.item {
+    background-color: #F2CEE6;
+    font-size: 12pt;
+    font-weight: bold;
+}
+.itemQuality-header {
+    background-color: #E8DCB9;
+    font-size: 12pt;
+    font-weight: bold;
+}
+.itemQuality{
+    background-color: #C3DBC5;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.category-table {
+    width: 100%;
+}
+
+    .category-table > thead > tr > th {
+        background-color: #537A9A;
+    }
+
+    .category-table > tbody > tr {
+        background-color: #9BBFDD;
+    }
+
+.subcategory-table {
+    width: 100%;
+}
+
+.subcategory-table > thead > tr > th {
+    background-color: #157700;
+}
+
+.subcategory-table > tbody > tr {
+    background-color: #97EA85 ;
+}
+
+.item-table {
+    width: 100%;
+}
+
+.item-table > thead > tr > th {
+    background-color: #BBF400;
+}
+
+.item-table > tbody > tr{
+    background-color: #AAC061 ;
+}
+
+
+.itemquality-table {
+    width: 100%;
+}
+
+    .itemquality-table > thead > tr > th {
+        background-color: #157700;
+    }
+
+    .itemquality-table > tbody > tr{
+        background-color: #97EA85;
+    }
+
+    .itemquality-table > tbody > tr{
+        background-color: #D4EECF;
+    }
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 4;
+    align-content: center;
+    transition: 0.5s;
+}
+
+    .overlay span {
+        padding: 10px;
+        left: 50%;
+        top: 50%;
+        position: relative;
+        font-size: 15px;
+        background-color: rgba(255, 255, 255, 1);
+        align-content: center;
+        z-index: 3;
+    }
+
+    .overlay img {
+        left: 50%;
+        top: 50%;
+        position: relative;
+        background-color: grey;
+        color: #FFF;
+        align-content: center;
+        z-index: 3;
+    }
+
+.spinner img {
+    left: 50%;
+    top: 50%;
+    position: relative;
+    background-color: grey;
+    color: #FFF;
+    height: 30px;
+    width: 30px;
+    align-content: center;
+    z-index: 3;
+}
+
+
+.spinner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    color: #FFF;
+    opacity: .2;
+    z-index: 4;
+    align-content: center;
+}
+
+.spinner-white img {
+    left: 50%;
+    top: 100%;
+    position: relative;
+    background-color: white;
+    color: #FFF;
+    height: 30px;
+    width: 30px;
+    align-content: center;
+    z-index: 3;
+}
+
+
+.spinner-white {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: #FFF;
+    opacity: .2;
+    z-index: 4;
+    align-content: center;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }

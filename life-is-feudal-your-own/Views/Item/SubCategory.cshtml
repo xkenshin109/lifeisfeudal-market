@@ -1,0 +1,27 @@
+﻿
+<table class="subcategory-table">
+    <thead>
+        <tr>
+            <th class="col-md-1"></th>
+            <th class="col-md-11">Type</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: subcategories">
+        <tr class="itemQuality-header">
+            <td class="col-md-1">
+                <button type="button" class="btn btn-default" data-bind="click: expand">
+                    <span class="glyphicon glyphicon-plus" data-bind="visible: !expanded()"></span>
+                    <span class="glyphicon glyphicon-minus" data-bind="visible: expanded"></span>
+                </button>
+            </td>
+            <td class="col-md-11" data-bind="text:name"></td>
+        </tr>
+        <tr data-bind="visible: expanded">
+            <td class="expanded"></td>
+            <td colspan="12">
+                @{ Html.RenderPartial("Item");}
+            </td>
+
+        </tr>
+    </tbody>
+</table>

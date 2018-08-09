@@ -1,151 +1,47 @@
-﻿<div>
-    <h2>Item Management</h2>
-</div>
-<table>
-<thead>
-    <tr>
-        <th class="col-md-1">Category</th>
-        <th class="col-md-11"></th>
-    </tr>
-</thead>
-<tbody data-bind="foreach: $root.categories">
-    <tr class="item">
-        <td class="col-md-1">
-            <button type="button" class="btn btn-default" data-bind="click: expand">
-                <span class="glyphicon glyphicon-plus" data-bind="visible: !expanded()"></span>
-                <span class="glyphicon glyphicon-minus" data-bind="visible: expanded"></span>
-            </button>
-        </td>
-        <td class="col-md-11" data-bind="text:name"></td>
-    </tr>
-    <tr data-bind="visible:expanded">
-        <td></td>
-        <td colspan="12">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="col-md-2"></th>
-                        <th class="col-md-10"></th>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: subcategories">
-                    <tr class="itemQuality-header">
-                        <td class="col-md-2">
-                            <button type="button" class="btn btn-default" data-bind="click: expand">
-                                <span class="glyphicon glyphicon-plus" data-bind="visible: !expanded()"></span>
-                                <span class="glyphicon glyphicon-minus" data-bind="visible: expanded"></span>
-                            </button>
-                        </td>
-                        <td class="col-md-10" data-bind="text:name"></td>
-                    </tr>
-                    <tr data-bind="visible: expanded">
-                        <td></td>
-                        <td colspan="12">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="col-md-3"></th>
-                                        <th class="col-md-5">Name</th>
-                                        <th class="col-md-4">Base Price (CP)</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: items">
-                                    <tr class="item" data-bind="visible: !edit()">
-                                        <td class="col-md-3">
-                                            <button type="button" class="btn btn-default" data-bind="click: expanded">
-                                                <span class="glyphicon glyphicon-plus" data-bind="visible: !expand()"></span>
-                                                <span class="glyphicon glyphicon-minus" data-bind="visible: expand"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-default" data-bind="click:$parent.editItem">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </button>
-                                        </td>
-                                        <td class="col-md-5" data-bind="text: name"></td>
-                                        <td class="col-md-4" data-bind="text: price"></td>
-                                    </tr>
-                                    <tr class="item" data-bind="visible: edit(), with: $parent.itemForEdit">
-                                        <td class="col-md-3">
-                                            <button type="button" class="btn btn-default" data-bind="click: $parents[1].confirmEdit">
-                                                <span class="glyphicon glyphicon-floppy-save"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-default" data-bind="click: $parents[1].cancelEdit">
-                                                <span class="glyphicon glyphicon-remove-sign"></span>
-                                            </button>
-                                        </td>
-                                        <td class="col-md-5" data-bind="text: name"></td>
-                                        <td class="col-md-4">
-                                            <input class="form-control" data-bind="text: price,value:price" type="text" placeholder="Base Price" />
-                                        </td>
-                                    </tr>
-                                    <tr data-bind="visible:expand">
-                                        <td></td>
-                                        <td colspan="12">
-                                            <table data-bind="visible: quality().length > 0 ">
-                                                <thead>
-                                                    <tr class="itemQuality-header">
-                                                        <th class="col-md-1"></th>
-                                                        <th class="col-md-2">Quality</th>
-                                                        <th class="col-md-2">Sell Price</th>
-                                                        <th class="col-md-2">Sell Active</th>
-                                                        <th class="col-md-2">Buy Price</th>
-                                                        <th class="col-md-2">Buy Active</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody data-bind="foreach: quality()">
-                                                    <tr class="itemQuality" data-bind="visible: !edit()">
-                                                        <td class="col-md-1">
-                                                            <button type="button" class="btn btn-default" data-bind="click: $parent.editQuality">
-                                                                <span class="glyphicon glyphicon-pencil"></span>
-                                                            </button>
-                                                        </td>
-                                                        <td class="col-md-2 selling" data-bind="text: itemQualityType().name"></td>
-                                                        <td class="col-md-2 selling" data-bind="text: sell_price"></td>
-                                                        <td class="col-md-2">
-                                                            <span class="glyphicon glyphicon-check buying" data-bind="visible:sell_active"></span>
-                                                            <span class="glyphicon glyphicon-remove-sign selling" data-bind="visible:sell_active === 0"></span>
-                                                        </td>
-                                                        <td class="col-md-2 buying" data-bind="text: buy_price"></td>
-                                                        <td class="col-md-2">
-                                                            <span class="glyphicon glyphicon-check buying" data-bind="visible:buy_active"></span>
-                                                            <span class="glyphicon glyphicon-remove-sign selling" data-bind="visible:buy_active === 0"></span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="itemQuality" data-bind="visible: edit(), with: $parent.qualityForEdit">
-                                                        <td class="col-md-1">
-                                                            <button type="button" class="btn btn-default" data-bind="click: $parents[1].confirmEdit">
-                                                                <span class="glyphicon glyphicon-floppy-save"></span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-default" data-bind="click: $parents[1].cancelEdit">
-                                                                <span class="glyphicon glyphicon-remove-sign"></span>
-                                                            </button>
-                                                        </td>
-                                                        <td class="col-md-2 buying">
-                                                            <select class="form-control" data-bind="options: $root.itemTypes, optionsText:'name',value:itemQualityType,event:{change:updateItemQualityType}" />
-                                                        </td>
-                                                        <td class="col-md-2 selling" data-bind="text: sell_price"></td>
-                                                        <td class="col-md-2">
-                                                            <input type="checkbox" data-bind="checked:sell_active,value:sell_active" class="form-control" />
-                                                        </td>
-                                                        <td class="col-md-2 buying" data-bind="text: buy_price"></td>
-                                                        <td class="col-md-2">
-                                                            <input type="checkbox" data-bind="checked:buy_active,value:buy_active" class="form-control" />
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <button class="btn btn-block btn-primary" data-bind="click:$parent.addNewQuality">Add New Quality</button>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
+﻿<table class="item-table">
+    <thead>
+        <tr>
+            <th class="col-md-2"></th>
+            <th class="col-md-5">Name</th>
+            <th class="col-md-5">Base Price (CP)</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: items">
+        <tr class="item" data-bind="visible: !edit()">
+            <td class="col-md-2">
+                <button type="button" class="btn btn-default" data-bind="click: expanded">
+                    <span class="glyphicon glyphicon-plus" data-bind="visible: !expand()"></span>
+                    <span class="glyphicon glyphicon-minus" data-bind="visible: expand"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-bind="click:$parent.editItem">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+            <td class="col-md-5" data-bind="text: name"></td>
+            <td class="col-md-5" data-bind="text: price"></td>
+        </tr>
+        <tr class="item" data-bind="visible: edit(), with: $parent.itemForEdit">
+            <td class="col-md-2">
+                <button type="button" class="btn btn-default" data-bind="click: $parents[1].confirmEdit">
+                    <span class="glyphicon glyphicon-floppy-save"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-bind="click: $parents[1].cancelEdit">
+                    <span class="glyphicon glyphicon-remove-sign"></span>
+                </button>
+            </td>
+            <td class="col-md-5" data-bind="text: name"></td>
+            <td class="col-md-5">
+                <input class="form-control" data-bind="text: price,value:price" type="text" placeholder="Base Price" />
+            </td>
+        </tr>
+        <tr data-bind="visible:expand" class="expanded">
+            <td class="expanded"></td>
+            <td colspan="12">
+                @{ Html.RenderPartial("ItemQuality");}
+                @*<button class="btn btn-block btn-primary" data-bind="click:$parent.addNewQuality">Add New Quality</button>*@
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
 
-                            </table>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-</tbody>
 </table>

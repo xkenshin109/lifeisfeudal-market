@@ -7,18 +7,22 @@ function ManagerVm() {
     self.items = ko.observableArray();
     self.allItems = ko.observableArray();
     self.allItemQuality = ko.observableArray();
-    self.itemTypes = ko.observableArray();
+    self.allItemTypes = ko.observableArray();
     self.orderForm = ko.observable(new OrderFormVm(null,self));
     async.parallel({
         items: loadItems,
         itemQuality: loadItemQuality,
         itemTypes: loadItemQualityTypes
     }, function (err, r) {
-        self.allItems = r.items;
-        allItems = r.items;
-        self.allItemQuality = r.itemQuality;
-        allItemQuality = r.itemQuality;
-        self.itemTypes = r.itemTypes;
+        r.items.forEach(i => {
+            self.allItems.push(i);
+        });
+        r.itemQuality.forEach(i => {
+            self.allItemQuality.push(i);
+        });
+        r.itemTypes.forEach(i => {
+            self.allItemTypes.push(i);
+        });
     });
 }
 function loadItems(callback) {

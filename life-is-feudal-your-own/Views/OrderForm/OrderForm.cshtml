@@ -1,7 +1,7 @@
 ﻿<h2>Black Oak Order Form</h2>
 <div data-bind="with: orderForm">
     <div>
-        <label>Copy and Paste this in a message to your GM to submit your order!</label>
+        <label>Copy and Paste this in a message to your GM to submit your order! An Email will be sent but this is a Carbon Copy</label>
     </div>
     <div>
         <textarea data-bind="text: orderMessage,value: orderMessage"></textarea>
@@ -25,6 +25,9 @@
                         <button type="button" class="btn btn-default" data-bind="click: $parent.editProduct">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
+                        <button type="button" class="btn btn-default" data-bind="click: $parent.deleteProduct">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
                     </td>
                     <td class="col-md-2" data-bind="text:item().name"></td>
                     <td class="col-md-2" data-bind="text:itemQualityType().name"></td>
@@ -45,7 +48,7 @@
                         </button>
                     </td>
                     <td class="col-md-2">
-                        <select class="form-control" data-bind="options: $root.allItems, optionsText:'name',value:item,event:{change:updatePrice}"></select>
+                        <select class="form-control" data-bind="options: activeItems(), optionsText:'name',value:item,event:{change:updatePrice}"></select>
                     </td>
                     <td class="col-md-2">
                         <select class="form-control" data-bind="options: activeQuality(), optionsText:'name',value:itemQualityType,event:{change:updatePrice}"></select>

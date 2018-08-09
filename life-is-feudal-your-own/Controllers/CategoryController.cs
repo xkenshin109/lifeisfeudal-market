@@ -29,5 +29,17 @@ namespace life_is_feudal_your_own.Controllers
             }
             
         }
+        public ActionResult GetSubCategoriesById(long id)
+        {
+            using (var db = new LifeIsFeudalDb())
+            {
+                var ret = db.Items.Where(x => x.Category_Id == id).Select(x => new
+                {
+                    id = x.SubCategory.Id,
+                    name = x.SubCategory.Name
+                }).ToList().Distinct();
+                return Json(ret, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

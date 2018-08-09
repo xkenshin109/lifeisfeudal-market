@@ -10,6 +10,9 @@
     self.productForEdit = ko.observable();
     self.selectedProduct = ko.observable();
     self.orderMessage = ko.observable();
+    self.deleteProduct = function (product) {
+        self.products.remove(product);
+    };
     self.editProduct = function (product) {
         if (self.selectedProduct()) {
             self.cancelProduct();
@@ -21,21 +24,18 @@
         self.selectedProduct().edit(true);
     };
     self.cancelEdit = function () {
+        if (!self.selectedProduct().confirmed()) {
+            self.products.remove(self.selectedProduct());
+        }
+        self.productForEdit().edit(false);
         self.selectedProduct().edit(false);
-        
-        //if (self.productForEdit().id() === null) {
-        //    self.products.remove(self.selectedProduct());
-        //}
         self.productForEdit(null);
         self.selectedProduct(null);
     };
     self.confirmEdit = function (quality) {
-        console.log(ko.toJS(quality));
-        console.log(ko.toJS(self.productForEdit()));
         quality.update(ko.toJS(self.productForEdit()));
         self.selectedProduct().update(ko.toJS(self.productForEdit()));
         self.selectedProduct().edit(false);
-        //self.selectedProduct().save();
         self.selectedProduct(null);
         self.productForEdit(null);
     };
@@ -53,9 +53,11 @@
         return false;
     });
     self.addItem = function () {
+        if (self.selectedProduct()) {
+            self.cancelEdit();
+        }
         var x = new OrderFormProductsVm(null, self);
         x.edit(true);
-        console.log(ko.toJS(x));
         self.products.push(x);
         self.editProduct(x);
     };
@@ -68,7 +70,7 @@
             ret.push('No items in cart');
         }
         return ret;
-    }
+    };
     self.save = function () {
         console.log(self.validations());
         if (self.validations().length === 0) {
@@ -134,13 +136,13 @@
                 Selling: p.isSelling(),
                 Price: p.price(),
                 Quantity: p.quantity()
-            }
+            };
         });
         var cd = {
             Id: self.id(),
             PlayerName: self.name(),
             OrderNumber: self.orderNumber()
-        }
+        };
         $.post('OrderForm/SendOrder', {order:cd,products:d}, function (data, err) {
         });
         self.orderMessage(message);

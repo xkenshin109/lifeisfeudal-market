@@ -1,1 +1,61 @@
-﻿
+﻿<table data-bind="visible: quality().length > 0 ">
+    <thead>
+        <tr class="itemQuality-header">
+            <th class="col-md-1"></th>
+            <th class="col-md-2">Quality</th>
+            <th class="col-md-2">Sell Price</th>
+            <th class="col-md-2">Sell Active</th>
+            <th class="col-md-2">Buy Price</th>
+            <th class="col-md-2">Buy Active</th>
+            <th class="col-md-1">Free</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: quality()">
+        <tr class="itemQuality" data-bind="visible: !edit()">
+            <td class="col-md-1">
+                <button type="button" class="btn btn-default" data-bind="click: $parent.editQuality">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+            <td class="col-md-2 selling" data-bind="text: itemQualityType().name"></td>
+            <td class="col-md-2 selling" data-bind="text: sell_price"></td>
+            <td class="col-md-2">
+                <span class="glyphicon glyphicon-check buying" data-bind="visible:sell_active"></span>
+                <span class="glyphicon glyphicon-remove-sign selling" data-bind="visible:sell_active === 0"></span>
+            </td>
+            <td class="col-md-2 buying" data-bind="text: buy_price"></td>
+            <td class="col-md-2">
+                <span class="glyphicon glyphicon-check buying" data-bind="visible:buy_active"></span>
+                <span class="glyphicon glyphicon-remove-sign selling" data-bind="visible:buy_active === 0"></span>
+            </td>
+            <td class="col-md-2">
+                <span class="glyphicon glyphicon-check buying" data-bind="visible:free"></span>
+                <span>Sorry No Free</span>
+            </td>
+        </tr>
+        <tr class="itemQuality" data-bind="visible: edit(), with: $parent.qualityForEdit">
+            <td class="col-md-1">
+                <button type="button" class="btn btn-default" data-bind="click: $parents[1].confirmEdit">
+                    <span class="glyphicon glyphicon-floppy-save"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-bind="click: $parents[1].cancelEdit">
+                    <span class="glyphicon glyphicon-remove-sign"></span>
+                </button>
+            </td>
+            <td class="col-md-2 buying">
+                <select class="form-control" data-bind="options: $root.itemTypes, optionsText:'name',value:itemQualityType,event:{change:updateItemQualityType}" />
+            </td>
+            <td class="col-md-2 selling" data-bind="text: sell_price"></td>
+            <td class="col-md-2">
+                <input type="checkbox" data-bind="checked:sell_active,value:sell_active" class="form-control" />
+            </td>
+            <td class="col-md-2 buying" data-bind="text: buy_price"></td>
+            <td class="col-md-2">
+                <input type="checkbox" data-bind="checked:buy_active,value:buy_active" class="form-control" />
+            </td>
+            <td class="col-md-2">
+                <input type="checkbox" data-bind="checked:free,value:free" class="form-control" />
+            </td>
+        </tr>
+    </tbody>
+</table>

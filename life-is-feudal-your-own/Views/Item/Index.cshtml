@@ -1,7 +1,7 @@
 ﻿<div>
-    @{Html.RenderPartial("Item");}
+    @{Html.RenderPartial("Category");}
 </div>
-
+<div data-bind="visible: !loaded()" class="overlay"><img src="~/Content/spiffy.gif" /></div>
 @section scripts
 {
     <script src="~/Scripts/Item/ItemQualityVm.js"></script>

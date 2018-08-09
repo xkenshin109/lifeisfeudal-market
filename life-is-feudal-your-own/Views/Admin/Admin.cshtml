@@ -1,0 +1,36 @@
+﻿
+
+<table class="category-table" data-bind="visible: authenticated">
+    <thead>
+        <tr>
+            <th class="col-md-2">Actions</th>
+            <th class="col-md-5">Key</th>
+            <th class="col-md-5">Value</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: configs">
+        <tr data-bind="visible: !edit()">
+            <td class=col-md-2>
+                <button type="button" class="btn btn-default" data-bind="click: $parent.editKey">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+            <td class="col-md-5" data-bind="text:key"></td>
+            <td class="col-md-5" data-bind="text:value,visible: key !== 'password'"></td>
+        </tr>
+        <tr data-bind="visible: edit(), with: $parent.keyForEdit">
+            <td class=col-md-2>
+                <button type="button" class="btn btn-default" >
+                    <span class="glyphicon glyphicon-floppy-save" data-bind="click:$root.confirmEdit"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-bind="click:$root.cancelEdit">
+                    <span class="glyphicon glyphicon-remove-sign"></span>
+                </button>
+            </td>
+            <td class="col-md-5" data-bind="text:key()"></td>
+            <td class="col-md-5" >
+                <input data-bind="text:value(),value:value()" type="text" class="form-control"/>
+            </td>
+        </tr>
+    </tbody>
+</table>

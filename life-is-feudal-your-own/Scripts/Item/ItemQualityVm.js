@@ -8,6 +8,7 @@
     self.itemQualityType = ko.observable({ id: 0, name: '', sell_multiplier: 1, buy_multiplier: 1 });
     self.buy_active = ko.observable();
     self.sell_active = ko.observable();
+    self.free = ko.observable(false);
     self.created_at = ko.observable('');
     self.updated_at = ko.observable('');
 
@@ -63,16 +64,17 @@
         try {
             let data = {
                 Item_Id: self.item_id(),
-                ItemQualityType_id: self.itemQualityType().id,
+                ItemQualityType_Id: self.itemQualityType().id,
                 BuyActive: self.buy_active(),
-                SellActive: self.sell_active()
+                SellActive: self.sell_active(),
+                Free: self.free()
             };
             if (self.id()) {
                 data.Id = self.id();
             }
 
-            $.post('ItemQuality/Save', data, function (err, data) {
-
+            $.post('ItemQuality/Save', data, function (data, err) {
+                console.log(data);
             });
         } catch (e) {
             alert('Please check to ensure its a numeric value');

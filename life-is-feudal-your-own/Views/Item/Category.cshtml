@@ -1,0 +1,26 @@
+﻿
+<table class="category-table">
+    <thead>
+        <tr>
+            <th class="col-md-1"></th>
+            <th class="col-md-11">Category</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: $root.categories">
+        <tr class="item">
+            <td class="col-md-1">
+                <button type="button" class="btn btn-default" data-bind="click: expand">
+                    <span class="glyphicon glyphicon-plus" data-bind="visible: !expanded()"></span>
+                    <span class="glyphicon glyphicon-minus" data-bind="visible: expanded"></span>
+                </button>
+            </td>
+            <td class="col-md-11" data-bind="text:name"></td>
+        </tr>
+        <tr class="expanded" data-bind="visible:expanded">
+            <td class="expanded"></td>
+            <td colspan="12">
+                @{Html.RenderPartial("SubCategory");}
+            </td>
+        </tr>
+    </tbody>
+</table>

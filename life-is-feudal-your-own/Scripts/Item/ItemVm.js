@@ -7,8 +7,8 @@
     self.id = ko.observable(0);
     self.price = ko.observable(0);
     self.name = ko.observable('');
-    self.created_at = ko.observable('');
-    self.updated_at = ko.observable('');
+    //self.created_at = ko.observable('');
+    //self.updated_at = ko.observable('');
 
     self.quality = ko.observableArray();
     self.qualityForEdit = ko.observable();
@@ -43,6 +43,9 @@
         self.qualityForEdit(null);
     };
     self.addNewQuality = function () {
+        if (self.selectedQuality()) {
+            self.cancelEdit();
+        }
         var x = new ItemQualityVm(null, self);
         x.edit(true);
         self.quality.push(x);
@@ -51,14 +54,12 @@
     self.expanded = function () {
         self.expand(!self.expand());
         if (self.expand()) {
-            $.get('/ItemQuality/GetItemQualities', { id: data.id }, function (data, err) {
+            $.get('/Item/GetItemQualitiesById', { id: data.id }, function (data, err) {
                 self.quality.removeAll();
                 if (err) { console.log(err); }
-                data = JSON.parse(data);
                 data.forEach(d => {
                     self.quality.push(new ItemQualityVm(d, self));
                 });
-                console.log(ko.toJS(self.quality()));
             });    
         }        
     };
@@ -66,17 +67,17 @@
         self.id(data.id);
         self.name(data.name);
         self.price(data.price);
-        self.created_at(moment(data.created_at).format('YYYY-MM-DD'));
-        self.updated_at(moment(data.updated_at).format('YYYY-MM-DD'));
+        //self.created_at(moment(data.created_at).format('YYYY-MM-DD'));
+        //self.updated_at(moment(data.updated_at).format('YYYY-MM-DD'));
         
     };
     self.save = function () {
         let self = this;
         let data = {
             Name: self.name(),
-            Price: self.price()?parseInt(self.price()):0,
-            created_at: self.created_at(),
-            updated_at: self.updated_at()
+            Price: self.price()?parseInt(self.price()):0
+            //created_at: self.created_at(),
+            //updated_at: self.updated_at()
         };
         if (self.id()) {
             data.id = self.id();

@@ -1,0 +1,14 @@
+﻿
+<div>
+    @{Html.RenderPartial("Admin");}
+</div>
+<div data-bind="visible: !loaded()" class="overlay"><img src="~/Content/spiffy.gif" /></div>
+@section scripts
+{
+    <script src="~/Scripts/Admin/AdminVm.js"></script>
+    <script src="~/Scripts/Admin/AdminManagerVm.js"></script>
+}
+
+@section modals{
+    @{ Html.RenderPartial("AdminPasswordModal");}
+}

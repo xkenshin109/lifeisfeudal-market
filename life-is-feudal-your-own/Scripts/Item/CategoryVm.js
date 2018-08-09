@@ -6,16 +6,14 @@
     self.subcategories = ko.observableArray();
     self.expanded = ko.observable(false);
 
-    self.addSubCategories = function (subcats, items) {
-        _.forEach(subcats, (sc) => {
-            var scitems = _.filter(items, (i) => { return i.sub_category === sc.id; });
-            var scnew = new SubCategoryVm(sc, self);
-            scnew.addItems(scitems);
-            self.subcategories().push(scnew);            
-        });
-    };
     self.expand = function () {
         self.expanded(!self.expanded());
+        self.subcategories.removeAll();
+        $.get('/Category/GetSubCategoriesById', { id: self.id() }, function (data,err) {
+            data.forEach(sc => {
+                self.subcategories.push(new SubCategoryVm(sc,self));
+            });
+        });
     };
     self.update = function (data) {
         self.id(data.id);

@@ -200,6 +200,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -229,12 +230,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\livemap.PNG" />
+    <Content Include="Content\spiffy.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\async.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\Admin\AdminManagerVm.js" />
+    <Content Include="Scripts\Admin\AdminVm.js" />
+    <Content Include="Scripts\deps\async.min.js" />
+    <Content Include="Scripts\deps\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -249,21 +254,21 @@
     <Content Include="Scripts\Item\ItemQualityVm.js" />
     <Content Include="Scripts\Item\ItemVm.js" />
     <Content Include="Scripts\Item\SubCategoryVm.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\deps\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\deps\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\deps\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
-    <Content Include="Scripts\knockout-3.4.2.js" />
-    <Content Include="Scripts\LifeIsFeudalStyle.css" />
-    <Content Include="Scripts\lodash.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\deps\knockout-3.4.2.js" />
+    <Content Include="Scripts\deps\LifeIsFeudalStyle.css" />
+    <Content Include="Scripts\deps\lodash.js" />
+    <Content Include="Scripts\deps\modernizr-2.8.3.js" />
+    <Content Include="Scripts\deps\moment.js" />
     <Content Include="Scripts\OrderForm\OrderFormProductsVm.js" />
     <Content Include="Scripts\OrderForm\OrderFormVm.js" />
     <Content Include="Scripts\OrderForm\ManagerVm.js" />
@@ -286,6 +291,11 @@
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Item\ItemQuality.cshtml" />
     <Content Include="Views\Item\Item.cshtml" />
+    <Content Include="Views\Item\Category.cshtml" />
+    <Content Include="Views\Item\SubCategory.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
+    <Content Include="Views\Admin\AdminPasswordModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -307,6 +317,10 @@
     <ProjectReference Include="..\CoreManagement\CoreManagement.csproj">
       <Project>{023fc4e9-64ee-4d1d-b2c4-92aaac06665a}</Project>
       <Name>CoreManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkbookImport\WorkbookImport.csproj">
+      <Project>{76128d0e-b8a3-4010-8856-c910cdffac80}</Project>
+      <Name>WorkbookImport</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

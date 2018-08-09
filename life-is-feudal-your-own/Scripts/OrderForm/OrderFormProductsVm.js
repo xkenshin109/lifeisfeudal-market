@@ -11,8 +11,9 @@
     self.price = ko.observable(0);
     self.quantity = ko.observable(0);
     self.edit = ko.observable(false);
+    self.confirmed = ko.observable(false);
     self.update = function (data) {
-        console.log(ko.toJS(self.activeItems()));
+        self.confirmed(true);
         self.id(data.id);
         self.orderForm_id(data.orderForm_id);
         if (data.item) {
@@ -43,27 +44,28 @@
     };
     self.activeItems = function () {
 
-        return self.parent().parent().allItems;
+        return self.parent().parent().allItems();
     };
     self.activeQuality = function () {
-        let aq = _.filter(self.parent().parent().allItemQuality, (i) => {
+        if (self.item().id === 0) {
+            return self.parent().parent().allItemQuality();
+        }
+        let aq = _.filter(self.parent().parent().allItemQuality(), (i) => {
             return i.Item_Id === self.item().id && (i.BuyActive && !self.isSelling() || i.SellActive && self.isSelling());
         });
-        let ids = [];
-        _.forEach(aq, function (i) {
-            if (!_.some(ids, function (d) { return i.ItemQualityType_id === d; })) {
-                ids.push(i.ItemQualityType_id);
-            }
+        let types = _.filter(self.parent().parent().allItemTypes(), i => {
+            return _.some(aq, q => {
+                return q.ItemQualityType_Id === i.id;
+            });
         });
-        let filteredQuality = [];
-        _.forEach(self.parent().parent().itemTypes);
-        return _.filter(self.parent().parent().itemTypes, function (i) { return _.some(ids, (d) => { return d === i.id; }); });
+
+        return types;
     };
     self.updatePrice = function () {
         let itemquality = null;
         let perPiece = 1;
 
-        itemquality = _.find(self.parent().parent().itemTypes, function (i) {
+        itemquality = _.find(self.parent().parent().allItemTypes(), function (i) {
             return i.id === self.itemQualityType().id;
         });
         if (!self.isSelling()) { 
@@ -76,7 +78,7 @@
         if (self.isSelling()) {
             if (itemquality) {
 
-                self.price((self.item().price * itemquality.sell_multiplier * itemquality.buy_multiplier * self.quantity()).toFixed(0));
+                self.price((self.item().price * itemquality.sell_multiplier * self.quantity() * itemquality.buy_multiplier).toFixed(0));
             } else {
                 alert('Item Product is not sold here');
             }

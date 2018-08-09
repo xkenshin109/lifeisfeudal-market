@@ -54,7 +54,34 @@ namespace life_is_feudal_your_own.Controllers
                 }                
             }
         }       
-        
-        
+        public ActionResult GetItemQualitiesById(long id)
+        {
+            using(var db = new LifeIsFeudalDb())
+            {
+                var ret = db.ItemQualities.Where(x => x.Item_Id == id).ToList().Select(x => new {
+                    buy_active = x.BuyActive,
+                    id = x.Id,
+                    Item_id = x.Item_Id,
+                    ItemQualityType_id = x.ItemQualityType_Id,
+                    sell_active = x.SellActive,
+                    created_at = x.Created
+                }); ;
+                return Json(ret, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult GetItemsById(long catId,long subId)
+        {
+            using (var db = new LifeIsFeudalDb())
+            {
+                var ret = db.Items.Where(x => x.SubCategory_Id == subId && x.Category_Id == catId).ToList()
+                    .Select(x=>new {
+                        id = x.Id,
+                        name = x.Name,
+                        price = x.Price
+                    });
+                return Json(ret, JsonRequestBehavior.AllowGet);
+            };
+
+        }
     }
 }
