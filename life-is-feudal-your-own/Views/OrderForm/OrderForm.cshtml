@@ -4,7 +4,14 @@
         <label>Copy and Paste this in a message to your GM to submit your order! An Email will be sent but this is a Carbon Copy</label>
     </div>
     <div>
-        <textarea data-bind="text: orderMessage,value: orderMessage"></textarea>
+        <div>
+            <textarea data-bind="text: orderMessage,value: orderMessage"></textarea>
+        </div>
+        <div>
+            <label>Total Amount Selling: <span data-bind="text: totalSell()"></span> CP</label>
+            <br />
+            <label>Total Amount Buying: <span data-bind="text: totalBuy()"></span> CP</label>
+        </div>
     </div>
     <div>
         <input data-bind="text:name, value:name" placeholder="Player Name" type="text" />

@@ -1,5 +1,6 @@
 ﻿function OrderFormVm(data,parent) {
     var self = this;
+    self.modal = ko.observable();
     self.id = ko.observable();
     self.parent = ko.observable(parent);
     self.name = ko.observable('');
@@ -10,6 +11,27 @@
     self.productForEdit = ko.observable();
     self.selectedProduct = ko.observable();
     self.orderMessage = ko.observable();
+    self.totalSell = ko.computed(function () {
+        var sellItems = _.filter(self.products(), p => {
+            return p.isSelling();
+        });
+        var total = 0;
+        sellItems.forEach(x => {
+            total += parseInt(x.price());
+        });
+        return total;
+        
+    });
+    self.totalBuy = ko.computed(function () {
+        var buyItems = _.filter(self.products(), p => {
+            return !p.isSelling();
+        });
+        var total = 0;
+        buyItems.forEach(x => {
+            total += parseInt(x.price());
+        });
+        return total;
+    });
     self.deleteProduct = function (product) {
         self.products.remove(product);
     };
@@ -45,6 +67,8 @@
         self.orderNumber(data.OrderNumber);
         self.created_at(moment(data.Created).format('YYYY-MM-DD'));
         self.updated_at(moment(data.Updated).format('YYYY-MM-DD'));
+        self.modal(document.getElementById("OrderConfirmModal"));
+        self.modal().style.display = "none";
     };
     self.enableSave = ko.computed(function(){
         if (self.products().length > 0 && self.name() !== undefined) {
@@ -87,10 +111,7 @@
                 };
                 x.Products.push(r);
             });
-            if (self.id()) {
-                x.Id = self.id();
-            }
-            $.post('/OrderForm/Save',{ product: x }, function (d) {
+            $.post('/OrderForm/Save', { product: x }, function (d) {
                 self.update(d);
                 return self.send();
             });
@@ -106,7 +127,6 @@
             OrderNumber: self.orderNumber()
         };
         var prod = [];
-        console.log(ko.toJS(self.products()));
         _.forEach(self.products(), (p) => {
             var s = this;
             var itemQuality = _.find(self.parent().allItemQuality(), (i) => {
@@ -119,7 +139,7 @@
         });
         var message = '';
         var selling = _.filter(prod, (p) => {
-            console.log(ko.toJS(p));
+            
             return p.Selling;
         });
         if (selling.length > 0) {
@@ -135,17 +155,17 @@
         if (buying.length > 0) {
             message += '\n Buying:\n';
             _.forEach(buying, (p) => {
-                console.log(ko.toJS(p));
                 //p.save();
                 message += p.quantity() + ' X ' + p.item().name + '(' + p.itemQualityType().name + ') ' + (p.item().price ? p.item().price : 0) + ' = ' + (p.price() ? p.price() : 0) + '\n';
             });
         }
         var d = _.map(prod, (p) => {
+            var price = ko.toJS({ price: p.price() });
             return {
-                OrderForm_id: p.orderForm_id(),
-                ItemQuality_id: p.itemQuality().Id,
+                OrderForm_Id: p.orderForm_id(),
+                ItemQuality_Id: p.itemQuality().Id,
                 Selling: p.isSelling(),
-                Price: p.price(),
+                Price: price.price,
                 Quantity: p.quantity()
             };
         });
@@ -154,10 +174,18 @@
             PlayerName: self.name(),
             OrderNumber: self.orderNumber()
         };
-        $.post('OrderForm/SendOrder', {order:cd,products:d}, function (data, err) {
+        $.post('OrderForm/SendOrder', { order: cd, products: d }, function (data, err) {
+            if (data.success) {
+                self.products.removeAll();
+                self.name(null);
+                self.modal().style.display = "block";
+            }
         });
         self.orderMessage(message);
     };
+    self.closeModal = function () {
+        self.modal().style.display = "none"
+    }
     if (data) {
         self.update(data);
     }

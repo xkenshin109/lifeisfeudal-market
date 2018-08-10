@@ -38,7 +38,6 @@ namespace life_is_feudal_your_own.Controllers
                     db.SaveChanges();
                     var ret = new
                     {
-                        Id = product.Id,
                         OrderNumber = product.OrderNumber,
                         PlayerName = product.PlayerName
                     };
@@ -60,23 +59,24 @@ namespace life_is_feudal_your_own.Controllers
                 {
                     x.ItemQuality = db.ItemQualities.FirstOrDefault(y => x.ItemQuality_Id == y.Id);
                 });
-            }
-            var itemsSelling = products.Where(x => x.Selling).ToList();
-            var itemsBuying = products.Where(x => !x.Selling).ToList();
-            if(itemsSelling.Count > 0)
-            {
-                htmlBody += "</br><p>Selling</p>";
-                htmlBody += htmlMessage.CreateTable(itemsSelling);
-            }
-            if(itemsBuying.Count > 0)
-            {
-                htmlBody += "</br></br><p>Buying</p>";
-                htmlBody += htmlMessage.CreateTable(itemsBuying);
-            }
+            
+                var itemsSelling = products.Where(x => x.Selling).ToList();
+                var itemsBuying = products.Where(x => !x.Selling).ToList();
+                if(itemsSelling.Count > 0)
+                {
+                    htmlBody += "</br><p>Selling</p>";
+                    htmlBody += htmlMessage.CreateTable(itemsSelling);
+                }
+                if(itemsBuying.Count > 0)
+                {
+                    htmlBody += "</br></br><p>Buying</p>";
+                    htmlBody += htmlMessage.CreateTable(itemsBuying);
+                }
             
             
-            SendEmail.SendEmailMessage($"Player Order: {order.PlayerName} Order Number: {order.Id.ToString().PadLeft(5,'0')}",htmlBody);
-            return Json(new { });
+                SendEmail.SendEmailMessage($"Player Order: {order.PlayerName} Order Number: {order.Id.ToString().PadLeft(5,'0')}",htmlBody);
+                return Json(new { success= true,data=new { } });
+            }
         }
     }
 }
