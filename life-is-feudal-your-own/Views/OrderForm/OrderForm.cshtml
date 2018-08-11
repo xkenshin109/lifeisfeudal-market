@@ -73,8 +73,8 @@
             </tbody>
         </table>
         <div>
-            <button class="btn btn-block btn-primary" data-bind="click:addItem">Add New Item</button>
-            <button class="btn btn-block btn-success" data-bind="click:save;enable:enableSave">Send Order</button>
+            <button class="btn btn-block btn-primary" data-bind="click:addItem,disable:productForEdit()">Add New Item</button>
+            <button class="btn btn-block btn-success" data-bind="click:save, disable:!enableSave()">Send Order</button>
         </div>
     </div>
     

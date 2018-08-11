@@ -24,6 +24,7 @@ namespace life_is_feudal_your_own.Controllers
                     x.SellActive,
                     x.ItemQualityType_Id,
                     x.Free,
+                    x.OverridePrice,
                     x.BuyActive,
                     x.Created
                 });
@@ -42,6 +43,7 @@ namespace life_is_feudal_your_own.Controllers
                     Item_id = ret.Item_Id,
                     ItemQualityType_id = ret.ItemQualityType_Id,
                     sell_active = ret.SellActive,
+                    overridePrice = ret.OverridePrice,
                     free = ret.Free,
                     created_at = ret.Created
                 };
@@ -60,6 +62,7 @@ namespace life_is_feudal_your_own.Controllers
                     Item_id = y.Item_Id,
                     ItemQualityType_id = y.ItemQualityType_Id,
                     sell_active = y.SellActive,
+                    overridePrice = y.OverridePrice,
                     free = y.Free,
                     created_at = y.Created
                 });
@@ -82,6 +85,7 @@ namespace life_is_feudal_your_own.Controllers
                     existing.Item_Id = item.Item_Id;
                     existing.ItemQualityType_Id = item.ItemQualityType_Id;
                     existing.Free = item.Free;
+                    existing.OverridePrice = item.OverridePrice;
                     db.Entry(existing).State = System.Data.Entity.EntityState.Modified;
                 }
                 db.SaveChanges();
@@ -93,7 +97,8 @@ namespace life_is_feudal_your_own.Controllers
                     ItemQualityType_id = item.ItemQualityType_Id,
                     sell_active = item.SellActive,
                     created_at = item.Created,
-                    free = item.Free
+                    free = item.Free,
+                    overridePrice = item.OverridePrice
                 };
                 return Json(ret, JsonRequestBehavior.AllowGet);
             }

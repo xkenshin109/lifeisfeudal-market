@@ -1,0 +1,63 @@
+﻿@if (@Model != null)
+{
+<div>
+    <div>
+        <h2>Caridia Order Form</h2>
+        <h3>Player Name @Model.PlayerName</h3>
+        <h3>Order Form: @Model.OrderNumber</h3>
+    </div>
+    <div>
+        <table style="border-collapse: collapse; border: 2px solid black" width="100%" class="table table-striped">
+            <thead>
+                <tr align="center" style="border: 1px solid black; border-style:solid">
+                    <th width="2%" style="text-align: center"></th>
+                    <th width="10%" style="text-align: center">Name</th>
+                    <th width="5%" style="text-align: center">Quality</th>
+                    <th width="7%" style="text-align: center">Price</th>
+                    <th width="22%" style="text-align: center">Quantity</th>
+                    <th width="22%" style="text-align: center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in @Model.Products)
+                {
+                    <tr align="center" style="border: 1px solid black; border-style: solid;">
+                        <td width="2%">@item.Name/td>
+                        <td width="10%">@item.Quality</td>
+                        <td width="5%">@item.Price</td>
+                        <td width="7%">@item.Quantity</td>
+                        <td width="22%">@item.Total</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table style="border-collapse: collapse; border: 2px solid black" width="100%" class="table table-striped">
+            <thead>
+                <tr align="center" style="border: 1px solid black; border-style:solid">
+                    <th width="2%" style="text-align: center">Name</th>
+                    <th width="10%" style="text-align: center">Name</th>
+                    <th width="5%" style="text-align: center">Quality</th>
+                    <th width="7%" style="text-align: center">Price</th>
+                    <th width="22%" style="text-align: center">Quantity</th>
+                    <th width="22%" style="text-align: center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in @Model.Products)
+                {
+                    <tr align="center" style="border: 1px solid black; border-style: solid;">
+                        <td width="2%">@item.Id</td>
+                        <td width="10%">@item.EsiId</td>
+                        <td width="5%">@item.Utility</td>
+                        <td width="7%">@item.Delivery_Point</td>
+                        <td width="22%">@item.Service_Address</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+}

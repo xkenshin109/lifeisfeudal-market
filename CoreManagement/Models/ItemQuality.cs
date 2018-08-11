@@ -18,6 +18,7 @@ namespace CoreManagement.Models
         public bool BuyActive { get; set; }
         public bool SellActive { get; set; }
         public bool Free { get;set; }
+        public long OverridePrice { get; set; }
         public DateTime Created { get; set; }
 
     }

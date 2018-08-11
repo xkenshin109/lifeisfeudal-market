@@ -2,10 +2,10 @@
 <div id="OrderConfirmModal" class="modal" data-bind="visible: orderForm()">
 
     <!-- Modal content -->
-    <div class="modal-content">
+    <div class="modal-content modalbg" style="align-items:center">
         <h1 style="text-align: center">Order Submitted</h1>
         <h4>Confirmation Number: <span data-bind="text: orderForm().orderNumber()"></span></h4>
-        <button class="btn btn-default btn-primary" data-bind="click:orderForm().closeModal">Close</button>
+        <button class="form-control btn btn-default btn-primary" data-bind="click:orderForm().closeModal">Close</button>
     </div>
 
 </div>

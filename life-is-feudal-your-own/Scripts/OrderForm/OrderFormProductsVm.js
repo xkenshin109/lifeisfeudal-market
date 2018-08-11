@@ -12,6 +12,7 @@
     self.quantity = ko.observable(0);
     self.edit = ko.observable(false);
     self.confirmed = ko.observable(false);
+    
     self.update = function (data) {
         self.confirmed(true);
         self.id(data.id);
@@ -57,6 +58,9 @@
         return self.parent().parent().allItems();
     };
     self.activeQuality = function () {
+        if (!self.item()) {
+            return self.parent().parent().allItemQuality();
+        }
         if (self.item().id === 0) {
             return self.parent().parent().allItemQuality();
         }
@@ -74,13 +78,27 @@
     self.updatePrice = function () {
         var itemquality = null;
         var perPiece = 1;
-
+        if (self.quantity() === 0 || !self.quantity()) {
+            self.price(0);
+            return null;
+        }
+        if (!self.item().id) {
+            self.price(0);
+            return null;
+        }
         itemquality = _.find(self.parent().parent().allItemTypes(), function (i) {
             return i.id === self.itemQualityType().id;
         });
+        iq = _.find(self.parent().parent().allItemQuality(), function (i) {
+            return i.Item_Id === self.item().id && i.ItemQualityType_Id === itemquality.id;
+        });
+        var price = self.item().price;
+        if (iq.OverridePrice !== 0 && iq.OverridePrice) {
+            price = iq.OverridePrice;
+        }
         if (!self.isSelling()) { 
             if (itemquality) {
-                self.price((self.item().price * itemquality.sell_multiplier * self.quantity()).toFixed(0));   
+                self.price((price * itemquality.sell_multiplier * self.quantity()).toFixed(0));   
             } else {
                 alert('Item Product is not sold here');
             }
@@ -88,7 +106,7 @@
         if (self.isSelling()) {
             if (itemquality) {
 
-                self.price((self.item().price * itemquality.sell_multiplier * self.quantity() * itemquality.buy_multiplier).toFixed(0));
+                self.price((price * itemquality.sell_multiplier * self.quantity() * itemquality.buy_multiplier).toFixed(0));
             } else {
                 alert('Item Product is not sold here');
             }

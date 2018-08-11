@@ -1,7 +1,8 @@
-﻿<div>
+﻿<div data-bind="visible: !loaded()" class="overlay"><img src="~/Content/spiffy.gif" /></div>
+<div>
     @{Html.RenderPartial("OrderForm");}
 </div>
-<div data-bind="visible: !loaded()" class="overlay"><img src="~/Content/spiffy.gif" /></div>
+
 @section scripts
 {
     <script src="~/Scripts/OrderForm/OrderFormProductsVm.js"></script>

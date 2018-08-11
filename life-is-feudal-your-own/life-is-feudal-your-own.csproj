@@ -230,9 +230,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\emailparchment.jpg" />
     <Content Include="Content\livemap.PNG" />
+    <Content Include="Content\medievalparchment.jpg" />
+    <Content Include="Content\parchment.jpg" />
     <Content Include="Content\spiffy.gif" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\1001fonts-cardinal-eula.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -244,6 +248,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\Cardinal-Alternate.ttf" />
+    <Content Include="fonts\Cardinal.ttf" />
     <None Include="Properties\PublishProfiles\caridia-crossroad-market-place.fosterbrosproductions.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\fosterbrosproductions.com - Web Deploy.pubxml" />
@@ -297,6 +303,7 @@
     <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\AdminPasswordModal.cshtml" />
     <Content Include="Views\OrderForm\OrderConfirmModal.cshtml" />
+    <Content Include="Templates\OrderEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

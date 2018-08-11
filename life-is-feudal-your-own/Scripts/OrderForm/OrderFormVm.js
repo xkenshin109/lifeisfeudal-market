@@ -17,7 +17,8 @@
         });
         var total = 0;
         sellItems.forEach(x => {
-            total += parseInt(x.price());
+            var price = ko.toJS({ price: x.price() });
+            total += parseInt(price.price);
         });
         return total;
         
@@ -28,7 +29,8 @@
         });
         var total = 0;
         buyItems.forEach(x => {
-            total += parseInt(x.price());
+            var price = ko.toJS({ price:x.price() });
+            total += parseInt(price.price);
         });
         return total;
     });
@@ -39,8 +41,7 @@
         if (self.selectedProduct()) {
             self.cancelProduct();
         }
-        console.log(ko.toJS(product));
-        self.productForEdit(new OrderFormProductsVm(ko.toJS(product), self));
+        self.productForEdit(new OrderFormProductsVm(JSON.parse((JSON.stringify(product))), self));
         self.selectedProduct(product);
         self.productForEdit().edit(true);
         self.selectedProduct().edit(true);

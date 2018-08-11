@@ -11,16 +11,21 @@
     self.free = ko.observable(false);
     self.created_at = ko.observable('');
     self.updated_at = ko.observable('');
-
+    self.overridePrice = ko.observable(null);
     self.sell_price = ko.computed(function () {
+        if (self.overridePrice() !== 0 && self.overridePrice()) {
+            return parseInt(self.overridePrice()).toFixed(0);
+        }
         return (self.itemQualityType().sell_multiplier * self.parent().price()).toFixed(0);
     });
     self.buy_price = ko.computed(function () {
-        console.log(self.itemQualityType().sell_multiplier);
-        console.log(self.parent().price());
-        console.log(self.itemQualityType().buy_multiplier);
         console.log('Price', self.itemQualityType().sell_multiplier * self.parent().price() * self.itemQualityType().buy_multiplier);
-        return (self.itemQualityType().sell_multiplier * self.parent().price() * self.itemQualityType().buy_multiplier).toFixed(0);
+        var price = self.parent().price();
+        if (self.overridePrice() !== 0 && self.overridePrice()) {
+            price = parseInt(self.overridePrice());
+        }
+        var totalBuyPrice = (self.itemQualityType().sell_multiplier * price * self.itemQualityType().buy_multiplier).toFixed(0);
+        return totalBuyPrice;
     });
     self.updateItemQualityType = function () {
         var itemquality = null;
@@ -55,6 +60,8 @@
         
         self.buy_active(data.buy_active);
         self.sell_active(data.sell_active);
+        self.free(data.free);
+        self.overridePrice(data.overridePrice);
         self.created_at(moment(data.created_at).format('YYYY-MM-DD'));
         self.updated_at(moment(data.updated_at).format('YYYY-MM-DD'));
         console.log(ko.toJS(self));
@@ -67,7 +74,8 @@
                 ItemQualityType_Id: self.itemQualityType().id,
                 BuyActive: self.buy_active(),
                 SellActive: self.sell_active(),
-                Free: self.free()
+                Free: self.free(),
+                OverridePrice: self.overridePrice()
             };
             if (self.id()) {
                 data.Id = self.id();

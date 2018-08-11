@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201808080220001_item_free.Designer.cs">
       <DependentUpon>201808080220001_item_free.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808110228277_override_feature.cs" />
+    <Compile Include="Migrations\201808110228277_override_feature.Designer.cs">
+      <DependentUpon>201808110228277_override_feature.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Configuration.cs" />
@@ -94,6 +98,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808080220001_item_free.resx">
       <DependentUpon>201808080220001_item_free.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808110228277_override_feature.resx">
+      <DependentUpon>201808110228277_override_feature.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
