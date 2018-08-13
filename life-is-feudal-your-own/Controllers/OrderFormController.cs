@@ -52,26 +52,28 @@ namespace life_is_feudal_your_own.Controllers
         }
         public ActionResult SendOrder(OrderForm order, List<OrderFormProduct> products)
         {
-            string htmlBody = htmlMessage.CreateHtmlHeader(order);
+
+            string htmlBody;// = htmlMessage.CreateHtmlHeader(order);
             using (var db = new LifeIsFeudalDb())
             {
                 products.ForEach(x =>
                 {
                     x.ItemQuality = db.ItemQualities.FirstOrDefault(y => x.ItemQuality_Id == y.Id);
                 });
-            
-                var itemsSelling = products.Where(x => x.Selling).ToList();
-                var itemsBuying = products.Where(x => !x.Selling).ToList();
-                if(itemsSelling.Count > 0)
-                {
-                    htmlBody += "</br><p>Selling</p>";
-                    htmlBody += htmlMessage.CreateTable(itemsSelling);
-                }
-                if(itemsBuying.Count > 0)
-                {
-                    htmlBody += "</br></br><p>Buying</p>";
-                    htmlBody += htmlMessage.CreateTable(itemsBuying);
-                }
+                order.Products = products;
+                htmlBody  = htmlMessage.CreateEmailHtml(order);
+                //var itemsSelling = products.Where(x => x.Selling).ToList();
+                //var itemsBuying = products.Where(x => !x.Selling).ToList();
+                //if(itemsSelling.Count > 0)
+                //{
+                //    htmlBody += "</br><p>Selling</p>";
+                //    htmlBody += htmlMessage.CreateTable(itemsSelling);
+                //}
+                //if(itemsBuying.Count > 0)
+                //{
+                //    htmlBody += "</br></br><p>Buying</p>";
+                //    htmlBody += htmlMessage.CreateTable(itemsBuying);
+                //}
             
             
                 SendEmail.SendEmailMessage($"Player Order: {order.PlayerName} Order Number: {order.Id.ToString().PadLeft(5,'0')}",htmlBody);

@@ -1,0 +1,80 @@
+﻿@font-face {
+    font-family: 'Cardinal';
+    src: url('../../fonts/Cardinal.ttf');
+    font-weight: bolder;
+    font-style: normal;
+}
+
+body {
+}
+td {
+    font-size: 15pt !important;
+    font-weight: bolder;
+    font-family: 'Cardinal';
+}
+
+th {
+    font-family: 'Cardinal';
+    font-size: 15pt;
+    font-weight: bolder;
+}
+
+.cardinal {
+    font-family: 'Cardinal';
+    font-weight: bolder;
+}
+
+div {
+    align-items: center;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("../../Content/medievalparchment.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.modalbg {
+    /* The image used */
+    background-image: url("../../Content/medievalparchment.jpg");
+    /* Full height */
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+span {
+    font-family: 'Cardinal';
+    font-size: 15pt;
+    font-weight: bolder;
+}
+
+h1 {
+    font-family: 'Cardinal';
+    font-size: 70pt;
+    font-weight: bolder;
+}
+
+h2 {
+    font-family: 'Cardinal';
+    font-size: 50pt;
+    font-weight: bolder;
+}
+
+h3 {
+    font-family: 'Cardinal';
+    font-size: 40pt;
+    font-weight: bolder;
+}
+
+h4 {
+    font-family: 'Cardinal';
+    font-size: 30pt;
+    font-weight: bolder;
+}
